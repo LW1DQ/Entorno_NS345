@@ -1,0 +1,16 @@
+# Entorno virtual de Python
+venv/
+__pycache__/
+*.pyc
+
+# Archivos de captura o salida de simulaciones
+*.pcap
+*.log
+*.csv
+*.xml
+*.dat
+
+# Jupyter y otros temporales
+*.ipynb_checkpoints
+*.backup
+*.tmp
