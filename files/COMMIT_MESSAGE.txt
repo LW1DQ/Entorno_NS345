@@ -1,0 +1,33 @@
+feat(installer): v4.0.0-beta — NS-3 3.48, 5G-LENA opcional, instalación resiliente
+
+Actualización mayor del instalador de entorno de investigación en redes:
+
+- NS-3 3.47 (ns-allinone) -> 3.48, instalado desde tarball directo
+  (ns-3.48.tar.bz2), sin depender del paquete ns-allinone.
+- 5G-LENA pasa de instalarse por defecto a ser OPCIONAL mediante la
+  variable INSTALL_5GLENA (false por defecto). Quienes dependan del
+  módulo nr deben activarla explícitamente antes de ejecutar el script.
+- Nueva install_apt_package() con distinción requerido/opcional: un
+  paquete opcional fallido ya no aborta la instalación completa.
+- Nuevo check_ubuntu(): valida el SO y advierte (sin abortar) si la
+  versión no es 26.x.
+- Fallback de configuración de NS-3 (reintenta con módulos por defecto
+  si la lista explícita de módulos falla).
+- Nuevas funciones run_test() (smoke test con `ns3 run first`) y
+  show_summary() (resumen final de instalación).
+- Estructura de directorios ampliada: results/, traces/, scripts/,
+  notebooks/ además de workspace/, docs/, backup/.
+- Documentación generada (README.md, docs/TOOLS_GUIDE.md) ahora usa
+  bloques condicionales según INSTALL_5GLENA en lugar de texto fijo.
+- set -o pipefail + trap en INT/TERM para salida controlada.
+
+BREAKING CHANGE: 5G-LENA ya no se instala por defecto (antes sí, en v3).
+Actualizar INSTALL_5GLENA=true en el script si el módulo nr es necesario.
+
+Regresión conocida a revisar: la selección de rama de 5G-LENA en v4
+solo intenta 5g-lena-v4.1.y, mientras que v3 probaba v4.2.y con
+fallback a v4.1.y. Pendiente de decidir si se restaura el fallback
+antes del release estable.
+
+Archivo: install_ns3_ubuntu26_v3_48_BETA.sh
+Ver CHANGELOG.md para el detalle completo.
