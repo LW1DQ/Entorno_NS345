@@ -85,7 +85,7 @@ install_system_dependencies() {
     
     # Lista de paquetes requeridos (incluyendo herramientas de análisis)
     PACKAGES=(
-        "python3.12-venv"
+        "python3-venv"
         "build-essential"
         "gcc"
         "g++"
