@@ -1,33 +1,17 @@
-feat(installer): v4.0.0-beta — NS-3 3.48, 5G-LENA opcional, instalación resiliente
+feat(installer): v5.0.0 — NS-3 3.49 y correcciones de instalación
 
-Actualización mayor del instalador de entorno de investigación en redes:
-
-- NS-3 3.47 (ns-allinone) -> 3.48, instalado desde tarball directo
-  (ns-3.48.tar.bz2), sin depender del paquete ns-allinone.
-- 5G-LENA pasa de instalarse por defecto a ser OPCIONAL mediante la
-  variable INSTALL_5GLENA (false por defecto). Quienes dependan del
-  módulo nr deben activarla explícitamente antes de ejecutar el script.
-- Nueva install_apt_package() con distinción requerido/opcional: un
-  paquete opcional fallido ya no aborta la instalación completa.
-- Nuevo check_ubuntu(): valida el SO y advierte (sin abortar) si la
-  versión no es 26.x.
-- Fallback de configuración de NS-3 (reintenta con módulos por defecto
-  si la lista explícita de módulos falla).
-- Nuevas funciones run_test() (smoke test con `ns3 run first`) y
-  show_summary() (resumen final de instalación).
-- Estructura de directorios ampliada: results/, traces/, scripts/,
-  notebooks/ además de workspace/, docs/, backup/.
-- Documentación generada (README.md, docs/TOOLS_GUIDE.md) ahora usa
-  bloques condicionales según INSTALL_5GLENA en lugar de texto fijo.
-- set -o pipefail + trap en INT/TERM para salida controlada.
-
-BREAKING CHANGE: 5G-LENA ya no se instala por defecto (antes sí, en v3).
-Actualizar INSTALL_5GLENA=true en el script si el módulo nr es necesario.
-
-Regresión conocida a revisar: la selección de rama de 5G-LENA en v4
-solo intenta 5g-lena-v4.1.y, mientras que v3 probaba v4.2.y con
-fallback a v4.1.y. Pendiente de decidir si se restaura el fallback
-antes del release estable.
-
-Archivo: install_ns3_ubuntu26_v3_48_BETA.sh
-Ver CHANGELOG.md para el detalle completo.
+- Nuevo install_ns3_ubuntu26_v5.sh: NS-3 3.48 -> 3.49 (tarball oficial).
+- Elimina el módulo wave (inexistente desde ns-3.39).
+- Corrige el cambio de directorio no revertido tras instalar NS-3
+  (venv/README se generaban dentro de ~/ns-3.X).
+- No sobrescribe README.md/.gitignore del repo: si se ejecuta desde el
+  clon usa ~/entorno_ns3 (configurable con NS3_WORKDIR).
+- Limpieza segura de ~/.bashrc: solo elimina líneas export PATH de
+  instaladores anteriores (el sed original borraba líneas del usuario).
+- Paquetes APT requeridos/opcionales, instalación no interactiva y
+  preconfiguración debconf para captura Wireshark sin root.
+- limits.conf idempotente, usermod con comillas y verificación de grupo.
+- requirements.lock.txt (pip freeze) y prueba funcional ns3 run first.
+- Documentación: README y CHANGELOG actualizados; entrada retroactiva
+  para install_ns3_ubuntu26_v4.sh; corrección del nombre del script
+  BETA y de enlaces de comparación inexistentes.
