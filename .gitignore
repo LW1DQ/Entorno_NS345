@@ -14,3 +14,64 @@ __pycache__/
 *.ipynb_checkpoints
 *.backup
 *.tmp
+
+# NS-3 build artifacts
+build/
+*.o
+*.a
+*.so
+*.lock-waf*
+.waf-*
+compile_commands.json
+cmake-cache/
+.lock-waf*
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.coverage
+.tox/
+.mypy_cache/
+
+# Archivos de entorno y configuración local
+.env
+.env.local
+*.env
+
+# Archivos de compilación NS-3
+*.o
+*.a
+*.so
+*.lo
+*.la
+
+# Archivos generados por waf
+.waf-*
+.lock-waf*
+.waf_config
+.clock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archivos grandes y binarios
+*.pcap
+*.zip
+*.tar.gz
+*.tar.bz2
+*.iso
+
+# Resultados de simulaciones
+results/
+traces/
+logs/
+*.pcapng
